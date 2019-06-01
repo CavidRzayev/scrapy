@@ -4,16 +4,16 @@ from scrapy_spider.items import QuoteItem
 
 class QuotesSpiderSpider(scrapy.Spider):
     name = 'quotes_spider'
-    allowed_domains = ['megamart.az']
-    start_urls = ['https://www.megamart.az/az/by-category/5792-metbex-ucun']
+    allowed_domains = ['myip.ms']
+    start_urls = ['https://myip.ms/browse/ip_addresses/1#top']
 
     def parse(self, response):
-        SET_SELECTOR='//div[@class="filters-grid all-filters col-lg-15 col-md-20 col-sm-20 col-xs-60"]'
-        next_page_url = response.xpath("//div[@class='product-img with-image']//a/@href").extract_first()
+        SET_SELECTOR='//t[@body]'
+        #next_page_url = response.xpath("//div[@class='product-img with-image']//a/@href").extract_first()
         for i in response.xpath(SET_SELECTOR):
             yield {
-                'title':i.xpath('.//div/h5/a/text()').extract_first(),
-                'price':i.xpath('.//div/span/text()').extract_first(),
+                'title':i.xpath('.//td/span/text()').extract_first(),
+                #'price':i.xpath('.//div/span/text()').extract_first(),
                 #'img':i.xpath('.//div/a/img/text()').extract_first(),
 
             } 
